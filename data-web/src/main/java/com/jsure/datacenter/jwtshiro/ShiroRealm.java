@@ -1,6 +1,8 @@
 package com.jsure.datacenter.jwtshiro;
 
 
+import com.jsure.datacenter.mapper.TRoleMapper;
+import com.jsure.datacenter.mapper.TUserMapper;
 import com.jsure.datacenter.model.entity.TRole;
 import com.jsure.datacenter.model.entity.TUser;
 import com.jsure.datacenter.service.TokenService;
@@ -28,12 +30,14 @@ import java.util.Set;
  * I am a Code Man -_-!
  */
 @Slf4j
-@Component
 public class ShiroRealm extends AuthorizingRealm {
 
 
     @Autowired
-    private TokenService tokenService;
+    private TUserMapper tUserMapper;
+
+    @Autowired
+    private TRoleMapper tRoleMapper;
 
 
     /**
@@ -57,8 +61,8 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = JWTUtil.getUsername(principals.toString());
-        TUser user = tokenService.findUserByUserName(username);
-        TRole tRole = tokenService.findPermissionByRoleId(user.getRoleId());
+        TUser user = tUserMapper.findByUserName(username);
+        TRole tRole = tRoleMapper.selectByPrimaryKey(user.getRoleId());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         Set<String> permission = new HashSet<>(Arrays.asList(tRole.getPermission().split(",")));
         simpleAuthorizationInfo.addStringPermissions(permission);
@@ -73,7 +77,7 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) {
-        //获取同ken
+        //获取token
         String token = (String) auth.getCredentials();
         //通过shiro认证
         return new SimpleAuthenticationInfo(token, token, "shiro_realm");

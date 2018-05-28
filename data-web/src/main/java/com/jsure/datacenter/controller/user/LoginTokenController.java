@@ -95,19 +95,44 @@ public class LoginTokenController extends BaseController {
     @ApiOperation(value="修改用户资料", notes="根据用户资料修改信息，返回修改后的用户信息")
     @RequestMapping(value = "user" ,method = RequestMethod.PUT)
     public Map<String, Object> updateUser(@RequestBody TUser user) {
-        log.info("call updateUserById, {}, URI:{}", requestParamToString(request), request.getRequestURI());
+        log.info("call updateUser, {}, URI:{}", requestParamToString(request), request.getRequestURI());
         Map<String, Object> result = Maps.newHashMap();
         try {
             checkShiroPermission("update");
             Map<String, Object> userInfo = tokenService.updateUser(user);
             result.put("user", userInfo);
-            log.info("success to updateUserById, RESULT:{}", result);
+            log.info("success to updateUser, RESULT:{}", result);
             return successData(CustomConstant.USER_INFO_SUCCESS, result);
         } catch (CustomException e) {
-            log.error("failed to updateUserById, RESULT:{},cause:{}", result, e);
+            log.error("failed to updateUser, RESULT:{},cause:{}", result, e);
             return failedData(e.getCode(), e.getMessage(), result);
         } catch (Exception e) {
-            log.error("failed to updateUserById, RESULT:{},cause:{}", result, e);
+            log.error("failed to updateUser, RESULT:{},cause:{}", result, e);
+            return failedData(CustomErrorEnum.ERROR_CODE_341FFF.getErrorCode(), CustomErrorEnum.ERROR_CODE_341FFF.getErrorDesc(), result);
+        }
+    }
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    @ApiOperation(value="添加用户", notes="添加用户，返回添加后的用户信息")
+    @RequestMapping(value = "user" ,method = RequestMethod.POST)
+    public Map<String, Object> addUser(@RequestBody TUser user) {
+        log.info("call addUser, {}, URI:{}", requestParamToString(request), request.getRequestURI());
+        Map<String, Object> result = Maps.newHashMap();
+        try {
+            checkShiroPermission("add");
+            Map<String, Object> userInfo = tokenService.addUser(user);
+            result.put("user", userInfo);
+            log.info("success to addUser, RESULT:{}", result);
+            return successData(CustomConstant.USER_INFO_SUCCESS, result);
+        } catch (CustomException e) {
+            log.error("failed to addUser, RESULT:{},cause:{}", result, e);
+            return failedData(e.getCode(), e.getMessage(), result);
+        } catch (Exception e) {
+            log.error("failed to addUser, RESULT:{},cause:{}", result, e);
             return failedData(CustomErrorEnum.ERROR_CODE_341FFF.getErrorCode(), CustomErrorEnum.ERROR_CODE_341FFF.getErrorDesc(), result);
         }
     }

@@ -1,9 +1,8 @@
 package com.jsure.datacenter.mapper;
 
 import com.jsure.datacenter.model.entity.TUser;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public interface TUserMapper {
     int deleteByPrimaryKey(Integer id);
 

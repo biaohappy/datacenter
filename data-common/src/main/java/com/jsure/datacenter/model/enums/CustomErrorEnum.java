@@ -22,7 +22,7 @@ public enum CustomErrorEnum {
     /**
      * 常用枚举
      */
-    ERROR_CODE_341000("200", "处理成功"),
+    SUCCESS_CODE_341000("200", "处理成功"),
     ERROR_CODE_341FFF("341FFF", "程序异常"),
     ERROR_CODE_341001("341001", "亲，您查询的信息不存在哦"),
     ERROR_CODE_341002("341002", "参数不能为空"),
@@ -32,7 +32,9 @@ public enum CustomErrorEnum {
     ERROR_CODE_341006("341006", "密码错误"),
     ERROR_CODE_341007("341007", "登录失败"),
     ERROR_CODE_341008("341008", "亲，权限不足~~~~"),
-    ERROR_CODE_341009("341009", "修改用户资料失败");
+    ERROR_CODE_341009("341009", "修改用户资料失败"),
+    ERROR_CODE_341010("341010", "添加用户失败"),
+    ERROR_CODE_341011("341011", "删除用户失败");
 
 
     @Getter

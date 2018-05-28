@@ -28,14 +28,13 @@ public class ShiroConfig {
 
     /**
      * 安全管理器
-     * @param realm
      * @return
      */
     @Bean("securityManager")
-    public DefaultWebSecurityManager getManager(ShiroRealm realm) {
+    public DefaultWebSecurityManager getManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         // 使用自定义realm
-        manager.setRealm(realm);
+        manager.setRealm(getShiroRealm());
         // 关闭shiro自带的session
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
@@ -46,6 +45,16 @@ public class ShiroConfig {
     }
 
     /**
+     * 自定义reaml
+     * @return
+     */
+    @Bean("shiroRealm")
+    public ShiroRealm getShiroRealm(){
+        ShiroRealm realm = new ShiroRealm();
+        return realm;
+    }
+
+    /**
      * 自定义过滤器
      * @param securityManager
      * @return
@@ -53,24 +62,25 @@ public class ShiroConfig {
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean factory(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
-        //添加自定义过滤器
+        // 添加自定义过滤器
         Map<String, Filter> filterMap = new LinkedHashMap<>();
         filterMap.put("restFilter", new RestFilter());
         filterMap.put("authToken", new LoginAuthFilter());
         factoryBean.setFilters(filterMap);
         factoryBean.setSecurityManager(securityManager);
-        //自定义url规则
+        // 自定义url规则
         Map<String, String> filterRuleMap = new LinkedHashMap<>();
-        //所有请求通过自定义的Filter
-        //开放swagger start
+        // 所有请求通过自定义的Filter
+        // 开放swagger start
         filterRuleMap.put("/swagger-ui.html", "anon");
         filterRuleMap.put("/swagger-resources", "anon");
         filterRuleMap.put("/v2/api-docs", "anon");
         filterRuleMap.put("/swagger-resources/configuration/**", "anon");
         filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");
-        //开放swagger end
+        // 开放swagger end
         filterRuleMap.put("/api/user/login", "restFilter,anon");
         filterRuleMap.put("/api/user/logout", "restFilter,anon");
+        // 拦截所以请求
         filterRuleMap.put("/**", "restFilter,authToken");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;

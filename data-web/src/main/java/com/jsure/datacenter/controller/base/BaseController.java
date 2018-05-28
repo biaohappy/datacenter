@@ -57,7 +57,7 @@ public class BaseController {
      */
     protected Map<String, Object> successData(String msg, Map<String, Object> data) {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("resCode", CustomErrorEnum.ERROR_CODE_341000.getErrorCode());
+        map.put("resCode", CustomErrorEnum.SUCCESS_CODE_341000.getErrorCode());
         map.put("resMsg", msg);
         map.put("result", data);
         return map;

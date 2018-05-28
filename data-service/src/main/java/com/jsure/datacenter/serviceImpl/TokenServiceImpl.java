@@ -39,12 +39,12 @@ public class TokenServiceImpl implements TokenService {
     /**
      * 登录
      * 把token返回给客户端-->客户端保存至cookie-->客户端每次请求附带cookie参数
+     *
      * @param userName
      * @param password
      * @return
      */
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public Map<String, Object> login(String userName, String password) {
         Map<String, Object> resultMap = Maps.newHashMap();
         TUser user = tUserMapper.findByUserName(userName);
@@ -68,20 +68,17 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public TUser findUserByUserName(String userName) {
         return tUserMapper.findByUserName(userName);
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public TRole findPermissionByRoleId(Integer roleId) {
-        TRole tRole = tRoleMapper.selectByPrimaryKey(roleId);
-        return tRole;
+        return tRoleMapper.selectByPrimaryKey(roleId);
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 36000, rollbackFor = Exception.class)
     public Map<String, Object> updateUser(TUser user) {
         Map<String, Object> resultMap = Maps.newHashMap();
         Integer r = tUserMapper.updateByPrimaryKeySelective(user);
@@ -90,12 +87,30 @@ public class TokenServiceImpl implements TokenService {
                     CustomErrorEnum.ERROR_CODE_341009.getErrorDesc());
         }
         TUser result = tUserMapper.selectByPrimaryKey(user.getId());
-        //返回用户名错误
         if (ObjectUtils.isNullOrEmpty(result)) {
             throw new CustomException(CustomErrorEnum.ERROR_CODE_341009.getErrorCode(),
                     CustomErrorEnum.ERROR_CODE_341009.getErrorDesc());
         }
-        resultMap.put("user",result);
+        resultMap.put("user", result);
+        return resultMap;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 36000, rollbackFor = Exception.class)
+    public Map<String, Object> addUser(TUser user) {
+        Map<String, Object> resultMap = Maps.newHashMap();
+        user.setPassword(MD5Util.MD5Encrypt(user.getPassword()));
+        Integer r = tUserMapper.insertSelective(user);
+        if (ObjectUtils.isNullOrEmpty(r)) {
+            throw new CustomException(CustomErrorEnum.ERROR_CODE_341010.getErrorCode(),
+                    CustomErrorEnum.ERROR_CODE_341010.getErrorDesc());
+        }
+        TUser result = tUserMapper.selectByPrimaryKey(user.getId());
+        if (ObjectUtils.isNullOrEmpty(result)) {
+            throw new CustomException(CustomErrorEnum.ERROR_CODE_341010.getErrorCode(),
+                    CustomErrorEnum.ERROR_CODE_341010.getErrorDesc());
+        }
+        resultMap.put("user", result);
         return resultMap;
     }
 }

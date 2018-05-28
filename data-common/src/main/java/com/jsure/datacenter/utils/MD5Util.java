@@ -1,6 +1,7 @@
 package com.jsure.datacenter.utils;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,12 +15,10 @@ import java.security.MessageDigest;
  * @Time: 10:06
  * I am a Code Man -_-!
  */
+@Slf4j
 public class MD5Util {
 
     private static final String SIGNATURE = "1f32a83588848d341c89f102dde11d4f";
-
-    private static final Logger logger = LoggerFactory.getLogger(MD5Util.class);
-
 
     public static String MD5(String str) {
         try {
@@ -30,14 +29,13 @@ public class MD5Util {
             // 补齐BigInteger省略的前置0
             return new String(new char[32 - hex.length()]).replace("\0", "0") + hex;
         } catch (Exception e) {
-            logger.info("MD5加密失败：" + e);
+            log.info("MD5加密失败：" + e);
             return null;
         }
     }
 
     public static String MD5Encrypt(String str) {
         String resultString = MD5Util.MD5(str + MD5Util.MD5(SIGNATURE));
-        logger.info("md5加密 :" + resultString);
         return resultString;
     }
 

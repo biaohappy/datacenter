@@ -1,9 +1,8 @@
 package com.jsure.datacenter.mapper;
 
 import com.jsure.datacenter.model.entity.TRole;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public interface TRoleMapper {
     int deleteByPrimaryKey(Integer id);
 

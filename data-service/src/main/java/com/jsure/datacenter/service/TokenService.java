@@ -21,4 +21,6 @@ public interface TokenService {
     TRole findPermissionByRoleId(Integer roleId);
 
     Map<String, Object> updateUser(TUser user);
+
+    Map<String, Object> addUser(TUser user);
 }
