@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.jsure.datacenter.model.token.CheckResult;
 import com.jsure.datacenter.utils.JWTUtil;
 import com.jsure.datacenter.utils.JSONUtil;
+import com.jsure.datacenter.utils.ObjectUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 
@@ -56,7 +57,6 @@ public class LoginAuthFilter extends FormAuthenticationFilter {
         } else {
             map.put("resCode", r.getErrCode());
             map.put("resMsg", r.getErrMsg());
-            map.put("data", r.getClaims());
             //写回给客户端
             PrintWriter out = httpResponse.getWriter();
             out.write(JSONUtil.obj2json(map));

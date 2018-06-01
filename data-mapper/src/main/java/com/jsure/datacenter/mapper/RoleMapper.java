@@ -1,6 +1,6 @@
 package com.jsure.datacenter.mapper;
 
-import com.jsure.datacenter.model.entity.Role;
+import com.jsure.datacenter.model.model.Role;
 import org.springframework.stereotype.Component;
 
 @Component

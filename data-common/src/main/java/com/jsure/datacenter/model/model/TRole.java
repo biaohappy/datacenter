@@ -1,4 +1,4 @@
-package com.jsure.datacenter.model.entity;
+package com.jsure.datacenter.model.model;
 
 import java.util.Date;
 

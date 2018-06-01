@@ -1,6 +1,8 @@
-package com.jsure.datacenter.mapper;
+package com.jsure.datacenter.mapper.usermapper;
 
-import com.jsure.datacenter.model.entity.TUser;
+import com.jsure.datacenter.model.model.TUser;
+
+import java.util.List;
 
 
 public interface TUserMapper {
@@ -17,4 +19,8 @@ public interface TUserMapper {
     int updateByPrimaryKey(TUser record);
 
     TUser findByUserName(String username);
+
+    TUser selectByUser(TUser record);
+
+    List<TUser> selectUserList(TUser record);
 }

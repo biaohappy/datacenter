@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jsure.datacenter.mapper.TPermissionMapper" >
-  <resultMap id="BaseResultMap" type="com.jsure.datacenter.model.entity.TPermission" >
+  <resultMap id="BaseResultMap" type="com.jsure.datacenter.model.model.TPermission" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
     <result column="permission" property="permission" jdbcType="VARCHAR" />
@@ -20,13 +20,13 @@
     delete from t_permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.jsure.datacenter.model.entity.TPermission" >
+  <insert id="insert" parameterType="com.jsure.datacenter.model.model.TPermission" >
     insert into t_permission (id, role_id, permission, 
       create_date)
     values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.jsure.datacenter.model.entity.TPermission" >
+  <insert id="insertSelective" parameterType="com.jsure.datacenter.model.model.TPermission" >
     insert into t_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jsure.datacenter.model.entity.TPermission" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jsure.datacenter.model.model.TPermission" >
     update t_permission
     <set >
       <if test="roleId != null" >
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jsure.datacenter.model.entity.TPermission" >
+  <update id="updateByPrimaryKey" parameterType="com.jsure.datacenter.model.model.TPermission" >
     update t_permission
     set role_id = #{roleId,jdbcType=INTEGER},
       permission = #{permission,jdbcType=VARCHAR},

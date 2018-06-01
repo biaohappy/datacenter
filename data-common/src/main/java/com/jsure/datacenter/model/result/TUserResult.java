@@ -1,5 +1,6 @@
 package com.jsure.datacenter.model.result;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +14,7 @@ import java.util.Date;
  * @Time: 15:07
  * I am a Code Man -_-!
  */
-@Getter
-@Setter
+@Data
 public class TUserResult implements Serializable {
 
     private static final long serialVersionUID = -5595969440795460228L;

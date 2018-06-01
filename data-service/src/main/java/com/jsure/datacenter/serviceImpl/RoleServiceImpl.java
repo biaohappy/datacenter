@@ -1,7 +1,7 @@
 package com.jsure.datacenter.serviceImpl;
 
 import com.jsure.datacenter.mapper.RoleMapper;
-import com.jsure.datacenter.model.entity.Role;
+import com.jsure.datacenter.model.model.Role;
 import com.jsure.datacenter.model.result.RoleResult;
 import com.jsure.datacenter.service.RoleService;
 import com.jsure.datacenter.utils.BeanMapper;

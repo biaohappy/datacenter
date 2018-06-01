@@ -41,10 +41,12 @@ public class CustomConstant {
 	 * JWT
 	 */
 	public static final String JWT_SECERT = "8677df7fc3a34e26a61c034d5ec8245d";			//密匙
-	public static final long JWT_TTL = 60 * 60 * 1000;									//token有效时间
+	public static final long JWT_TTL = 24 * 60 * 60 * 1000;								//token有效时间
 
 
 	public static final String SYS_LOGIN_SUCCESS = "登录成功";
-
 	public static final String USER_INFO_SUCCESS = "获取用户信息成功";
+	public static final String CREATE_USER_SUCCESS = "创建用户成功";
+	public static final String UPDATE_USER_SUCCESS = "更新用户信息成功";
+	public static final String DELETE_USER_SUCCESS = "删除用户成功";
 }

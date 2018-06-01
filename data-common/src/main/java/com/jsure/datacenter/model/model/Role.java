@@ -1,4 +1,4 @@
-package com.jsure.datacenter.model.entity;
+package com.jsure.datacenter.model.model;
 
 import lombok.Getter;
 import lombok.Setter;

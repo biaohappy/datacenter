@@ -1,6 +1,6 @@
 package com.jsure.datacenter.mapper;
 
-import com.jsure.datacenter.model.entity.TRole;
+import com.jsure.datacenter.model.model.TRole;
 
 
 public interface TRoleMapper {

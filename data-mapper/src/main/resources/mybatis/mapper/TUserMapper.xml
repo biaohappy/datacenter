@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jsure.datacenter.mapper.TUserMapper" >
-  <resultMap id="BaseResultMap" type="com.jsure.datacenter.model.entity.TUser" >
+<mapper namespace="com.jsure.datacenter.mapper.usermapper.TUserMapper" >
+  <resultMap id="BaseResultMap" type="com.jsure.datacenter.model.model.TUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
@@ -10,6 +10,43 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, role_id, user_name, password, create_Date
+  </sql>
+  <sql id="Select_List_Where">
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="roleId != null">
+        and role_id = #{roleId,jdbcType=INTEGER}
+      </if>
+      <if test="userName != null">
+        and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null">
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="beginTime != null">
+        and create_Date &gt; #{beginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and create_Date &lt; #{endTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+    ORDER BY
+    <choose>
+      <when test="orderField != null">
+        ${orderField}
+        <if test="orderRule != null">
+          ${orderRule}
+        </if>
+      </when>
+      <otherwise>
+        id asc , create_Date asc
+      </otherwise>
+    </choose>
+    <if test="pageCurrent != null">
+      LIMIT #{pageCurrent}, #{pageSize}
+    </if>
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -21,13 +58,13 @@
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.jsure.datacenter.model.entity.TUser" >
+  <insert id="insert" parameterType="com.jsure.datacenter.model.model.TUser" >
     insert into t_user (id, role_id, user_name, 
       password, create_Date)
     values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.jsure.datacenter.model.entity.TUser" >
+  <insert id="insertSelective" parameterType="com.jsure.datacenter.model.model.TUser" >
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -64,7 +101,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jsure.datacenter.model.entity.TUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jsure.datacenter.model.model.TUser" >
     update t_user
     <set >
       <if test="roleId != null" >
@@ -82,7 +119,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jsure.datacenter.model.entity.TUser" >
+  <update id="updateByPrimaryKey" parameterType="com.jsure.datacenter.model.model.TUser" >
     update t_user
     set role_id = #{roleId,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},
@@ -96,5 +133,18 @@
     <include refid="Base_Column_List" />
     from t_user
     where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUser" resultMap="BaseResultMap" parameterType="com.jsure.datacenter.model.model.TUser" >
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    <include refid="Select_List_Where" />
+  </select>
+
+  <select id="selectUserList" resultMap="BaseResultMap" parameterType="com.jsure.datacenter.model.model.TUser" >
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    <include refid="Select_List_Where" />
   </select>
 </mapper>

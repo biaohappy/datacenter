@@ -78,8 +78,8 @@ public class ShiroConfig {
         filterRuleMap.put("/swagger-resources/configuration/**", "anon");
         filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");
         // 开放swagger end
-        filterRuleMap.put("/api/user/login", "restFilter,anon");
-        filterRuleMap.put("/api/user/logout", "restFilter,anon");
+        filterRuleMap.put("/bc/users/login", "restFilter,anon");
+        filterRuleMap.put("/bc/users/logout", "restFilter,anon");
         // 拦截所以请求
         filterRuleMap.put("/**", "restFilter,authToken");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);

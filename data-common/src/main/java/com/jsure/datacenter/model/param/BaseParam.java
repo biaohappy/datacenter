@@ -1,5 +1,7 @@
 package com.jsure.datacenter.model.param;
 
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,57 +15,25 @@ import java.util.Date;
  * @Time: 14:56
  * I am a Code Man -_-!
  */
-@Getter
-@Setter
+@Data
 public class BaseParam implements Serializable {
 
-    private static final long serialVersionUID = 7918016316921875617L;
-
-    /**
-     * 是否抛异常
-     */
-    protected Boolean isNullError = true;
-
-    /**
-     * 分页当前页数（从1开始）
-     */
+    @ApiModelProperty("分页当前页数（默认从1开始）")
     protected Integer pageCurrent;
-    /**
-     * 分页每页个数
-     */
+
+    @ApiModelProperty("分页每页个数（默认10条）")
     protected Integer pageSize;
 
-    /**
-     * 时间范围查询参数--开始时间
-     */
+    @ApiModelProperty("时间范围查询参数--开始时间")
     protected Date beginTime;
 
-    /**
-     * 时间范围查询参数--结束时间
-     */
+    @ApiModelProperty("时间范围查询参数--结束时间")
     protected Date endTime;
-    /**
-     * 返回只和
-     */
-    protected String count;
 
-    /**
-     * 排序字段
-     */
+    @ApiModelProperty("排序字段")
     protected String orderField;
 
-    /**
-     * 排序規則
-     */
+    @ApiModelProperty("排序規則")
     protected String orderRule;
 
-    /**
-     * 返回字段时间 格式yyyy-MM-dd HH24:mm:ss
-     */
-    protected String stringTime;
-
-    /**
-     * 是否下载
-     */
-    protected Boolean isDownload = false;
 }

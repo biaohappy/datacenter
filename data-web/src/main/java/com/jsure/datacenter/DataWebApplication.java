@@ -17,5 +17,4 @@ public class DataWebApplication {
         SpringApplication.run(DataWebApplication.class, args);
     }
 
-
 }

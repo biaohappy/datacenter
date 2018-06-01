@@ -1,6 +1,6 @@
 package com.jsure.datacenter.mapper;
 
-import com.jsure.datacenter.model.entity.TPermission;
+import com.jsure.datacenter.model.model.TPermission;
 import org.springframework.stereotype.Component;
 
 @Component

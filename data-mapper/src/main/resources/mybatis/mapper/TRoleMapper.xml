@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jsure.datacenter.mapper.TRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.jsure.datacenter.model.entity.TRole" >
+  <resultMap id="BaseResultMap" type="com.jsure.datacenter.model.model.TRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
     <result column="permission" property="permission" jdbcType="VARCHAR" />
@@ -20,13 +20,13 @@
     delete from t_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.jsure.datacenter.model.entity.TRole" >
+  <insert id="insert" parameterType="com.jsure.datacenter.model.model.TRole" >
     insert into t_role (id, role_name, permission, 
       ceate_date)
     values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, 
       #{ceateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.jsure.datacenter.model.entity.TRole" >
+  <insert id="insertSelective" parameterType="com.jsure.datacenter.model.model.TRole" >
     insert into t_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jsure.datacenter.model.entity.TRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jsure.datacenter.model.model.TRole" >
     update t_role
     <set >
       <if test="roleName != null" >
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jsure.datacenter.model.entity.TRole" >
+  <update id="updateByPrimaryKey" parameterType="com.jsure.datacenter.model.model.TRole" >
     update t_role
     set role_name = #{roleName,jdbcType=VARCHAR},
       permission = #{permission,jdbcType=VARCHAR},

@@ -14,8 +14,8 @@ spring:
 #配置日志
 logging:
     level:
-        org.springframework.web: debug #按照包名不同制定不同日志级别
-        com.alibaba: debug
+        org.springframework.web: info #按照包名不同制定不同日志级别
+        com.alibaba: info
         com.jsure.datacenter: info
         com.jsure.datacenter.servviceImpl: "OFF" #屏蔽该包下的日志记录
     pattern:

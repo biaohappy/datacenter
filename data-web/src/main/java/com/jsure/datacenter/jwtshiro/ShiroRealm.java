@@ -2,10 +2,9 @@ package com.jsure.datacenter.jwtshiro;
 
 
 import com.jsure.datacenter.mapper.TRoleMapper;
-import com.jsure.datacenter.mapper.TUserMapper;
-import com.jsure.datacenter.model.entity.TRole;
-import com.jsure.datacenter.model.entity.TUser;
-import com.jsure.datacenter.service.TokenService;
+import com.jsure.datacenter.mapper.usermapper.TUserMapper;
+import com.jsure.datacenter.model.model.TRole;
+import com.jsure.datacenter.model.model.TUser;
 import com.jsure.datacenter.utils.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -16,7 +15,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.HashSet;

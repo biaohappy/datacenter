@@ -1,7 +1,7 @@
 package com.jsure.datacenter.controller.user;
 
-import com.jsure.datacenter.model.entity.User;
-import com.jsure.datacenter.utils.JsonResult;
+import com.jsure.datacenter.model.model.User;
+import com.jsure.datacenter.utils.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -48,16 +48,16 @@ public class UserController {
      */
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Integer", paramType = "path")
-    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
-    public ResponseEntity<JsonResult> getUserById (@PathVariable(value = "id") Integer id){
-        JsonResult r = new JsonResult();
+    @RequestMapping(value = "user/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Response> getUserById (@PathVariable(value = "id") Integer id){
+        Response r = new Response();
         try {
             User user = users.get(id);
             r.setResult(user);
-            r.setStatus("ok");
+            r.setResCode("ok");
         } catch (Exception e) {
             r.setResult(e.getClass().getName() + ":" + e.getMessage());
-            r.setStatus("error");
+            r.setResCode("error");
             e.printStackTrace();
         }
         return ResponseEntity.ok(r);
@@ -69,15 +69,15 @@ public class UserController {
      */
     @ApiOperation(value="获取用户列表", notes="获取用户列表")
     @RequestMapping(value = "users", method = RequestMethod.GET)
-    public ResponseEntity<JsonResult> getUserList (){
-        JsonResult r = new JsonResult();
+    public ResponseEntity<Response> getUserList (){
+        Response r = new Response();
         try {
             List<User> userList = new ArrayList<User>(users.values());
             r.setResult(userList);
-            r.setStatus("ok");
+            r.setResCode("ok");
         } catch (Exception e) {
             r.setResult(e.getClass().getName() + ":" + e.getMessage());
-            r.setStatus("error");
+            r.setResCode("error");
             e.printStackTrace();
         }
         return ResponseEntity.ok(r);
@@ -91,15 +91,15 @@ public class UserController {
     @ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value = "user", method = RequestMethod.POST)
-    public ResponseEntity<JsonResult> add (@RequestBody User user){
-        JsonResult r = new JsonResult();
+    public ResponseEntity<Response> add (@RequestBody User user){
+        Response r = new Response();
         try {
             users.put(user.getId(), user);
             r.setResult(user.getId());
-            r.setStatus("ok");
+            r.setResCode("ok");
         } catch (Exception e) {
             r.setResult(e.getClass().getName() + ":" + e.getMessage());
-            r.setStatus("error");
+            r.setResCode("error");
 
             e.printStackTrace();
         }
@@ -114,15 +114,15 @@ public class UserController {
     @ApiOperation(value="删除用户", notes="根据url的id来指定删除用户")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @RequestMapping(value = "user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<JsonResult> delete (@PathVariable(value = "id") Integer id){
-        JsonResult r = new JsonResult();
+    public ResponseEntity<Response> delete (@PathVariable(value = "id") Integer id){
+        Response r = new Response();
         try {
             users.remove(id);
             r.setResult(id);
-            r.setStatus("ok");
+            r.setResCode("ok");
         } catch (Exception e) {
             r.setResult(e.getClass().getName() + ":" + e.getMessage());
-            r.setStatus("error");
+            r.setResCode("error");
 
             e.printStackTrace();
         }
@@ -140,18 +140,18 @@ public class UserController {
             @ApiImplicitParam(name = "user", value = "用户实体user", required = true, dataType = "User")
     })
     @RequestMapping(value = "user/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<JsonResult> update (@PathVariable("id") Integer id, @RequestBody User user){
-        JsonResult r = new JsonResult();
+    public ResponseEntity<Response> update (@PathVariable("id") Integer id, @RequestBody User user){
+        Response r = new Response();
         try {
             User u = users.get(id);
 //            u.setUsername(user.getUsername());
 //            u.setAge(user.getAge());
             users.put(id, u);
             r.setResult(u);
-            r.setStatus("ok");
+            r.setResCode("ok");
         } catch (Exception e) {
             r.setResult(e.getClass().getName() + ":" + e.getMessage());
-            r.setStatus("error");
+            r.setResCode("error");
 
             e.printStackTrace();
         }

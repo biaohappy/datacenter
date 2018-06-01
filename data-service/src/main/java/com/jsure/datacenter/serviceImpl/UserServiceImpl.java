@@ -1,6 +1,6 @@
 package com.jsure.datacenter.serviceImpl;
 
-import com.jsure.datacenter.model.entity.User;
+import com.jsure.datacenter.model.model.User;
 import com.jsure.datacenter.model.enums.CustomErrorEnum;
 import com.jsure.datacenter.exception.CustomException;
 import com.jsure.datacenter.mapper.UserMapper;
