@@ -6,7 +6,7 @@ server:
       enabled: true #是否开启压缩，默认为false.
 spring:
   profiles:
-    active: local  #制定配置文件
+    active: test  #制定配置文件
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss  #指定时间格式及时差
     time-zone: GMT+8
