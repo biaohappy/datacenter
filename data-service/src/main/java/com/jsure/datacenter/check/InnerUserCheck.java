@@ -16,6 +16,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class InnerUserCheck {
 
+    /**
+     * 校验参数
+     * @param userParam
+     * @return
+     */
     public UserParam checkUserParam(UserParam userParam){
         if(ObjectUtils.isNullOrEmpty(userParam)){
             throw new CustomException(CustomErrorEnum.ERROR_CODE_341002.getErrorCode(),
