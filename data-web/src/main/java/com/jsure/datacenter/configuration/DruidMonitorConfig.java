@@ -54,7 +54,7 @@ public class DruidMonitorConfig {
 
         //添加不需要忽略的格式信息.
         filterRegistrationBean.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico," +
-                "/druid/*,/webjars/*,/v2/*,/swagger-ui.html,/swagger-resources/*");
+                "/druid/*,/webjars/*,/v2/*,/swagger-ui.html,/swagger-resources,/swagger-resources/*");
         return filterRegistrationBean;
     }
 }
