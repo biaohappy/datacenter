@@ -36,6 +36,6 @@ public class Hello {
         System.out.println(future.get());
         log.info("end submit");
 
-        return "success-mynameisgood";
+        return "success-mynameisgoodman";
     }
 }
