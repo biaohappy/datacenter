@@ -35,7 +35,7 @@ public class Hello {
         Future<String> future = asyncService.executeAsync(666);
         System.out.println(future.get());
         log.info("end submit");
-
-        return "success-hello";
+      
+        return "success-mynameisgoodman";
     }
 }
