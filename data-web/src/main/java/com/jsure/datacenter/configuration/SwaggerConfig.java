@@ -17,14 +17,14 @@ import java.util.List;
 
 /**
  * @Author: wuxiaobiao
- * @Description: Swagger2
+ * @Description: Swagger2 生成接口配置
  * 访问http://ip:8080/swagger-ui.html 查看restAPI接口信息
  * @Date: Created in 2018/4/10
  * @Time: 09:51
  * I am a Code Man -_-!
  */
 @Configuration
-public class Swagger {
+public class SwaggerConfig {
 
     @Bean
     public Docket createRestApi() {

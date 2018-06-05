@@ -5,12 +5,13 @@ import java.lang.annotation.*;
 /**
  * @Author: wuxiaobiao
  * @Description:
- * @Date: Created in 2018/5/29
- * @Time: 14:42
+ * @Date: Created in 2018/6/4
+ * @Time: 17:55
  * I am a Code Man -_-!
  */
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface RequestParamLog {
+public @interface TestAnnotation {
+    String desc() default "Hi Call";
 }

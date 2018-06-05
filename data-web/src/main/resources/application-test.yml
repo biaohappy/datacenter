@@ -40,5 +40,5 @@ spring:
     test-While-Idle: true #当连接空闲时，是否执行连接测试.
     test-on-return: false #在连接归还到连接池时是否测试该连接.
     pool-prepared-statements: false #指定是否池化statements
-    max-pool-prepared-statement-per-connection-size: 20
-    filters: stat,wall,log4j,config
+    max-pool-prepared-statement-per-connection-size: 20 #每个连接上PSCache的大小
+    filters: stat,wall,log4j,config #配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙

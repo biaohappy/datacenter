@@ -1,6 +1,7 @@
 package com.jsure.datacenter.controller.user;
 
 import com.google.common.collect.Maps;
+import com.jsure.datacenter.annotation.TestAnnotation;
 import com.jsure.datacenter.constant.CustomConstant;
 import com.jsure.datacenter.controller.base.BaseController;
 import com.jsure.datacenter.exception.CustomException;
@@ -72,6 +73,7 @@ public class LoginTokenController extends BaseController {
      * @param tokenPram
      * @return
      */
+    @TestAnnotation(desc = "测试玩玩")
     @ApiOperation(value = "登录", notes = "根据用户名和密码登录，返回token密钥")
     @ApiImplicitParam(name = "tokenPram", value = "用户令牌实体", required = true, dataType = "TokenPram")
     @RequestMapping(value = "/login", method = RequestMethod.POST)

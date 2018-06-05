@@ -38,7 +38,7 @@
     <!--控制台输出-->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date %level [%file:%line] %msg%n</pattern>
+            <pattern>%date %level [%thread] [%file:%line] %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
     </appender>

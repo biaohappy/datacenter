@@ -1,6 +1,8 @@
 package com.jsure.datacenter.jwtshiro;
 
 
+import com.jsure.datacenter.filter.LoginAuthFilter;
+import com.jsure.datacenter.filter.RestFilter;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -62,7 +64,7 @@ public class ShiroConfig {
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean factory(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
-        // 添加自定义过滤器
+        // 添加自定义过滤器 所有请求通过自定义的Filter
         Map<String, Filter> filterMap = new LinkedHashMap<>();
         filterMap.put("restFilter", new RestFilter());
         filterMap.put("authToken", new LoginAuthFilter());
@@ -70,14 +72,20 @@ public class ShiroConfig {
         factoryBean.setSecurityManager(securityManager);
         // 自定义url规则
         Map<String, String> filterRuleMap = new LinkedHashMap<>();
-        // 所有请求通过自定义的Filter
-        // 开放swagger start
-        filterRuleMap.put("/swagger-ui.html", "anon");
-        filterRuleMap.put("/swagger-resources", "anon");
-        filterRuleMap.put("/v2/api-docs", "anon");
-        filterRuleMap.put("/swagger-resources/configuration/**", "anon");
-        filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");
-        // 开放swagger end
+        // 开放swagger
+//        filterRuleMap.put("/swagger-ui.html", "anon");
+//        filterRuleMap.put("/swagger-resources", "anon");
+//        filterRuleMap.put("/v2/api-docs", "anon");
+//        filterRuleMap.put("/swagger-resources/configuration/**", "anon");
+//        filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");
+        filterRuleMap.put("/swagger-ui.html","anon");
+        filterRuleMap.put("/swagger/**","anon");
+        filterRuleMap.put("/webjars/**", "anon");
+        filterRuleMap.put("/swagger-resources/**","anon");
+        filterRuleMap.put("/v2/**","anon");
+        // 开放druid
+        filterRuleMap.put("/druid/**", "anon");
+        // 开放登录
         filterRuleMap.put("/bc/login", "restFilter,anon");
         filterRuleMap.put("/bc/logout", "restFilter,anon");
         // 拦截所以请求
