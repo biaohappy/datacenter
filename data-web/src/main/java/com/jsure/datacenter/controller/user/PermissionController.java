@@ -25,7 +25,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("api/permission/")
-@Api(description = "权限接口")
+@Api(tags="权限接口",description = "测试")
 public class PermissionController {
 
     @RequestMapping(value = "userpermission", method = RequestMethod.POST)

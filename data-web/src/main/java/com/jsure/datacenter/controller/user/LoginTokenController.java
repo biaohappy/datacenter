@@ -5,16 +5,14 @@ import com.jsure.datacenter.annotation.TestAnnotation;
 import com.jsure.datacenter.constant.CustomConstant;
 import com.jsure.datacenter.controller.base.BaseController;
 import com.jsure.datacenter.exception.CustomException;
+import com.jsure.datacenter.model.param.CrudUserParam;
 import com.jsure.datacenter.model.param.TokenPram;
 import com.jsure.datacenter.model.param.UserInfoParam;
 import com.jsure.datacenter.model.param.UserParam;
 import com.jsure.datacenter.model.result.TUserResult;
 import com.jsure.datacenter.service.userservice.TokenService;
 import com.jsure.datacenter.utils.Response;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +30,8 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@Api(description = "用户管理")
 @RequestMapping(value = "/bc")
+@Api(tags="用户管理",description = "测试")
 public class LoginTokenController extends BaseController {
 
     @Autowired
@@ -183,18 +181,18 @@ public class LoginTokenController extends BaseController {
     /**
      * 删除/批量删除用户
      *
-     * @param usersId
+     * @param crudUserParam
      * @return
      */
     @ApiOperation(value = "删除/批量删除用户", notes = "传入用户id数组")
-    @ApiImplicitParam(name = "usersId", value = "用户id数组", required = true, dataType = "Integer[]")
+    @ApiImplicitParam(name = "crudUserParam", value = "批量操作用户实体", required = true, dataType = "CrudUserParam")
     @RequestMapping(value = "/users", method = RequestMethod.DELETE)
-    public ResponseEntity<Response> deleteUsers(@RequestBody Integer[] usersId) {
+    public ResponseEntity<Response> deleteUsers(@RequestBody CrudUserParam crudUserParam) {
         Map<String, Object> result = Maps.newHashMap();
         Response r = new Response();
         try {
             checkShiroPermission("delete");
-            tokenService.deleteUsers(usersId);
+            tokenService.deleteUsers(crudUserParam.getId());
             successResult(r, CustomConstant.DELETE_USER_SUCCESS, result);
             log.info("success to updateUser, RESULT:{}", result);
         } catch (CustomException e) {

@@ -31,7 +31,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping(value = "api/")
-@Api(description = "登录注册")
+@Api(tags="JDC登录注册",description = "测试")
 public class LoginController {
 
     @Autowired

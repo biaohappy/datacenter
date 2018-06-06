@@ -72,8 +72,6 @@
 		</dependency>
 		<!-- end of Shiro security -->
 
-
-
 	</dependencies>
 
 	<build>

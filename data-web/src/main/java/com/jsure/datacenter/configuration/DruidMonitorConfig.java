@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @Author: wuxiaobiao
- * @Description: 配置druid监控系统
+ * @Description: 配置druid监控系统 localhost:8080/druid/login.html
  * @Date: Created in 2018/6/5
  * @Time: 13:29
  * I am a Code Man -_-!

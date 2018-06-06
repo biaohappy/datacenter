@@ -1,6 +1,7 @@
 package com.jsure.datacenter.controller.user;
 
 import com.jsure.datacenter.service.AsyncService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import java.util.concurrent.Future;
 @Slf4j
 @RestController
 @RequestMapping(value = "/bc")
+@Api(tags="测试接口模块",description = "测试")
 public class Hello {
 
     @Autowired

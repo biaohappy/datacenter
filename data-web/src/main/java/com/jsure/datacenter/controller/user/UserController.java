@@ -21,7 +21,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("api/")
-@Api(description = "用户管理")
+@Api(tags="用户测试",description = "测试")
 public class UserController {
 
     /**

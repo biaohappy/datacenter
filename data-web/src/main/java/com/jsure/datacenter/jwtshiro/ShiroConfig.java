@@ -82,7 +82,9 @@ public class ShiroConfig {
         filterRuleMap.put("/swagger/**","anon");
         filterRuleMap.put("/webjars/**", "anon");
         filterRuleMap.put("/swagger-resources/**","anon");
+        filterRuleMap.put("/docs.html","anon");
         filterRuleMap.put("/v2/**","anon");
+        filterRuleMap.put("/favicon.ico","anon");
         // 开放druid
         filterRuleMap.put("/druid/**", "anon");
         // 开放登录
